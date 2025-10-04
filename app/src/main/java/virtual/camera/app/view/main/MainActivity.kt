@@ -94,7 +94,7 @@ class MainActivity : LoadingActivity() {
 
     private fun initFab() {
         viewBinding.fab.setOnClickListener {
-            val userId = viewBinding.viewPager.currentItem
+            val userId = fragmentList[viewBinding.viewPager.currentItem].userID
             val intent = Intent(this, ListActivity::class.java)
             intent.putExtra("userID", userId)
             apkPathResult.launch(intent)
@@ -142,7 +142,12 @@ class MainActivity : LoadingActivity() {
                     val userId = data.getIntExtra("userID", 0)
                     val source = data.getStringExtra("source")
                     if (source != null) {
-                        fragmentList[userId].installApk(source)
+                        val fragment = fragmentList.firstOrNull { it.userID == userId }
+                        if (fragment != null) {
+                            fragment.installApk(source)
+                        } else {
+                            ToastUtils.showToast("User $userId not found")
+                        }
                     }
                 }
 
