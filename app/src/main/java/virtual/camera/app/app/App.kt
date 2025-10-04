@@ -1,7 +1,6 @@
 package virtual.camera.app.app
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
 import com.hack.opensdk.HackApplication
 
@@ -27,6 +26,11 @@ class App : HackApplication() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        mContext = base!!
+        base?.let { mContext = it }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        mContext = this
     }
 }

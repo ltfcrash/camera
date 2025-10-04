@@ -1,8 +1,9 @@
 package virtual.camera.app.widget
 
 import android.content.Context
+import android.util.AttributeSet
 import android.view.MotionEvent
-import com.imuxuan.floatingview.FloatingMagnetView
+import android.widget.FrameLayout
 import virtual.camera.app.R
 
 /**
@@ -11,16 +12,18 @@ import virtual.camera.app.R
  * @Author: kotlinMiku
  * @CreateDate: 2022/3/20 16:58
  */
-class EnFloatView(mContext: Context) : FloatingMagnetView(mContext) {
-
-    private val TAG = "RockerManager"
+class EnFloatView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     private var rockerView: RockerView? = null
 
-    private var mListener: LocationListener? = null
+    private var listener: LocationListener? = null
 
     init {
-        inflate(mContext, R.layout.view_float_rocker, this)
+        inflate(context, R.layout.view_float_rocker, this)
         initRockerView()
     }
 
@@ -33,7 +36,7 @@ class EnFloatView(mContext: Context) : FloatingMagnetView(mContext) {
                 val realDistance = currentDistance * 0.001F
                 //拉满的话，大概就是一秒五米
 
-                mListener?.invoke(realAngle, realDistance)
+                listener?.invoke(realAngle, realDistance)
 
             }
         }
@@ -49,7 +52,7 @@ class EnFloatView(mContext: Context) : FloatingMagnetView(mContext) {
     }
 
     fun setListener(listener: LocationListener) {
-        this.mListener = listener
+        this.listener = listener
     }
 
 }
