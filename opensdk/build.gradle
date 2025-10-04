@@ -1,0 +1,40 @@
+import org.gradle.api.attributes.Usage
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'virtual.camera.opensdk'
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+configurations.configureEach { configuration ->
+    if (configuration.name == 'default') {
+        configuration.canBeConsumed = true
+        configuration.attributes {
+            attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage, Usage.JAVA_API))
+        }
+    }
+}
+
+dependencies {
+    // Use api/implementation configurations to expose dependencies correctly
+    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+}
