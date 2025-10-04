@@ -47,16 +47,26 @@ wrapper. The helper script below pins the Java toolchain to JDK 17 so
 that the legacy Android Gradle Plugin used by this project runs
 successfully.
 
-1. Ensure you have internet connectivity the first time you build so
+1. Configure the Android SDK location before running the build. Either
+   export the `ANDROID_SDK_ROOT` environment variable or create a
+   `local.properties` file containing `sdk.dir=/absolute/path/to/sdk`.
+   Without one of these options Gradle cannot locate the SDK and the
+   build script will exit with an error. See below for an example:
+
+   ```bash
+   echo "sdk.dir=$HOME/Android/Sdk" > local.properties
+   ```
+
+2. Ensure you have internet connectivity the first time you build so
    Gradle can download the Android Gradle Plugin and Kotlin compiler
    dependencies.
-2. From the repository root execute:
+3. From the repository root execute:
 
    ```bash
    ./build_apk.sh
    ```
 
-3. After a successful build the APK is generated at
+4. After a successful build the APK is generated at
    `app/build/outputs/apk/debug/app-debug.apk`.
 
 > **Note:** The build will fail in fully offline environments because
