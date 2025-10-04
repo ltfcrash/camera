@@ -16,11 +16,30 @@
 
 
 # Strategi Kompatibilitas dan Stabilitas (Android 15+)
-- **Prioritaskan jalur non-root** dengan mengeksplorasi implementasi Virtual Camera melalui API resmi seperti MediaProjection atau Virtual Device/Display agar tetap stabil, aman, dan kompatibel dengan Google Play.
-- **Pertimbangkan migrasi ke CameraX Extension** untuk skenario injeksi efek pada aplikasi yang memakai CameraX, sehingga mengurangi kebutuhan hooking sistem.
-- **Optimalkan kode native** dengan memverifikasi dan mengompilasi ulang semua library NDK/C++ untuk mendukung ukuran halaman 16KB, guna menghindari risiko kompatibilitas terbesar di Android 15.
-- **Kelola performa video menggunakan GPU** (Vulkan atau OpenGL ES) untuk pemrosesan frame, resizing, dan cropping agar beban CPU dan konsumsi daya lebih rendah.
-- **Gunakan mediaProcessing FGS** saat streaming di latar belakang sehingga alokasi sumber daya tetap optimal dan sesuai regulasi Android 15.
+
+1. **Prioritaskan jalur non-root (jika memungkinkan)**
+   - Eksplorasi implementasi *Virtual Camera* melalui API resmi seperti **MediaProjection** untuk menangkap permukaan rendering atau memanfaatkan API Virtual Device/Display resmi Android.
+   - Pendekatan ini memang tidak dapat mencegat seluruh aplikasi kamera, namun jauh lebih stabil, aman, serta kompatibel dengan kebijakan Google Play dibandingkan teknik hooking yang invasif.
+
+2. **Riset MediaProjection dan opsi resmi lainnya**
+   - Uji kombinasi MediaProjection dengan pipeline virtual display agar tetap dapat menyediakan feed kamera sintetis untuk aplikasi pihak ketiga.
+   - Catat keterbatasan aplikasi yang tidak mengizinkan input dari sumber virtual lalu sediakan fallback atau panduan kompatibilitas bagi pengguna.
+
+3. **Migrasi ke CameraX Extension untuk injeksi efek**
+   - Jika target utama adalah aplikasi yang telah memakai CameraX, kembangkan **CameraX Extension** kustom sehingga efek dapat disisipkan tanpa perlu memodifikasi sistem.
+   - Pertahankan isolasi kode agar ekstensi tidak mempengaruhi aplikasi lain dan tetap memenuhi standar keamanan Play Store.
+
+4. **Optimasi kode native (wajib)**
+   - Verifikasi ulang seluruh library **NDK/C++** dan lakukan kompilasi dengan dukungan ukuran halaman **16 KB** yang menjadi standar baru Android 15.
+   - Kelalaian terhadap dukungan 16 KB page size merupakan risiko kompatibilitas terbesar; tambahkan otomatisasi build untuk mencegah regresi di masa depan.
+
+5. **Manajemen performa video berbasis GPU**
+   - Pindahkan pemrosesan frame utama (resizing, cropping, compositing) ke GPU dengan memanfaatkan **Vulkan** atau **OpenGL ES** guna mengurangi beban CPU dan meningkatkan efisiensi daya.
+   - Profilkan pipeline video secara berkala untuk memastikan latensi tetap rendah ketika menangani resolusi tinggi.
+
+6. **Gunakan mediaProcessing Foreground Service (FGS)**
+   - Untuk proses streaming di latar belakang, gunakan tipe FGS `mediaProcessing` agar alokasi sumber daya tetap optimal dan mematuhi regulasi Android 15.
+   - Pastikan dokumentasi aplikasi menjelaskan alasan penggunaan FGS demi transparansi ke pengguna.
 
 
 # Contact Me
