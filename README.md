@@ -3,9 +3,6 @@
 *Just for protect your camera privacy.*
 
 
-# demo video
-[![Watch the video](https://img.youtube.com/vi/lT-MP9c7SbY/maxresdefault.jpg)](https://www.youtube.com/embed/lT-MP9c7SbY)
-
 
 # Key Features
 **1. Support replacing the camera with a photo.**
@@ -42,8 +39,6 @@
    - Pastikan dokumentasi aplikasi menjelaskan alasan penggunaan FGS demi transparansi ke pengguna.
 
 
-# Contact Me
-andvipgroup@gmail.com
 
 # Building the APK
 
@@ -67,8 +62,7 @@ successfully.
 > **Note:** The build will fail in fully offline environments because
 > the required Gradle plugins cannot be downloaded.
 
-# APK Download
-**Latest version : 3.0.0**
+
 
 [Github](https://github.com/andvipgroup/VCamera/releases)
 
