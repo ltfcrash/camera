@@ -106,5 +106,6 @@ dependencies {
     // implementation 'com.imuxuan:floatingview:1.6'
 
     implementation project(':opensdk')
+    implementation project(':hack')
     // implementation 'virtual.camera.camera:camera:1.1.2'
 }
