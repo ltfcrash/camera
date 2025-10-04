@@ -27,7 +27,7 @@ import virtual.camera.app.R;
 import virtual.camera.app.app.App;
 import virtual.camera.app.settings.LogUtil;
 import virtual.camera.app.settings.MethodType;
-import virtual.camera.camera.MultiPreferences;
+import virtual.camera.app.settings.MultiPreferences;
 import virtual.camera.app.util.AppUtil;
 import virtual.camera.app.util.HandlerUtil;
 import virtual.camera.app.util.ToastUtils;
