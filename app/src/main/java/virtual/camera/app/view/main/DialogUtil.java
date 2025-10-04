@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import virtual.camera.app.R;
 import virtual.camera.app.util.ToastUtils;
-import virtual.camera.camera.MultiPreferences;
+import virtual.camera.app.settings.MultiPreferences;
 
 public class DialogUtil {
     public static void showDialog(final Activity activity, boolean check) {
