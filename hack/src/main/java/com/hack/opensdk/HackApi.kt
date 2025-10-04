@@ -11,7 +11,7 @@ object HackApi {
 
     private val application: Application
         get() {
-            if (!::HackApplication.application.isInitialized) {
+            if (!HackApplication::application.isInitialized) {
                 throw IllegalStateException("HackApplication is not initialized")
             }
             return HackApplication.application
