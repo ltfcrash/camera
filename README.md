@@ -45,6 +45,28 @@
 # Contact Me
 andvipgroup@gmail.com
 
+# Building the APK
+
+The project can be packaged into a debug APK with the included Gradle
+wrapper. The helper script below pins the Java toolchain to JDK 17 so
+that the legacy Android Gradle Plugin used by this project runs
+successfully.
+
+1. Ensure you have internet connectivity the first time you build so
+   Gradle can download the Android Gradle Plugin and Kotlin compiler
+   dependencies.
+2. From the repository root execute:
+
+   ```bash
+   ./build_apk.sh
+   ```
+
+3. After a successful build the APK is generated at
+   `app/build/outputs/apk/debug/app-debug.apk`.
+
+> **Note:** The build will fail in fully offline environments because
+> the required Gradle plugins cannot be downloaded.
+
 # APK Download
 **Latest version : 3.0.0**
 
