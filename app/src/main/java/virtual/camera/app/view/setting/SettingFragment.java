@@ -129,8 +129,8 @@ public class SettingFragment extends BaseFragment {
             is = getActivitySafe().getContentResolver().openInputStream(uri);
             byte[] buffer = new byte[1024];
             int len = is.read(buffer);
-            while (len >= 0) {
-                fos.write(buffer);
+            while (len > 0) {
+                fos.write(buffer, 0, len);
                 len = is.read(buffer);
             }
             fos.flush();
