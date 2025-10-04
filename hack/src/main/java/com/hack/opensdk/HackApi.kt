@@ -11,10 +11,11 @@ object HackApi {
 
     private val application: Application
         get() {
-            if (!HackApplication::application.isInitialized) {
+            try {
+                return HackApplication.getInstance()
+            } catch (_: UninitializedPropertyAccessException) {
                 throw IllegalStateException("HackApplication is not initialized")
             }
-            return HackApplication.application
         }
 
     private val packageManager: PackageManager
